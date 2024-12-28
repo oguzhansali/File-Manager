@@ -1,10 +1,10 @@
 import React from "react";
 import TreeMenuItem from "./TreeMenuItem";
 import './TreeMenu.style.css'
-import {useFoldersQuery} from "./../../queries/useFolderQuery";
+import {useFolderQuery} from "./../../queries/useFolderQuery";
 
 const TreeMenu = ({parentId}) => {
-    const folder = useFoldersQuery({
+    const folder = useFolderQuery({
         parentId,
     });
     const items = folder.list.data;

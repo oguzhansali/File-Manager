@@ -9,8 +9,8 @@ import { useNavigate } from "react-router-dom";
 
 
 
-const TreeMenuItem = ({name,id,parentId}) => {
-    const expanded = useBoolen(false);
+const TreeMenuItem = ({name,id,parentId,defaultExpanded}) => {
+    const expanded = useBoolen(defaultExpanded || false);
     const navigate = useNavigate();
     const handleClick= useCallback(()=>{
         console.log(id);
