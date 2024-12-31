@@ -6,13 +6,16 @@ import IconFolder from "../../assets/icons/IconFolder"
 import IconFolderOpen from "../../assets/icons/IconFolderOpen"
 import TreeMenu from "./TreeMenu";
 import { useNavigate, useParams } from "react-router-dom";
-
+import { useViewContext } from "../../context/view-context/view-context";
 
 
 const TreeMenuItem = ({name,id,parentId,defaultExpanded}) => {
     const expanded = useBoolen(defaultExpanded || false);
     const navigate = useNavigate();
     const params = useParams()
+    const {clear} = useViewContext();
+    
+
     const handleClick= useCallback(()=>{
         console.log(id);
 
