@@ -20,6 +20,12 @@ export const useFolderQuery = (id)=> {
 
     });
 
+    const files = useQuery({
+        queryKey: ["filesn",{_query}],
+        queryFn: () => backend.fileService.list(_query).then((res) => res.data.result),
+
+    });
+
     const addSubfolder = useMutation({
         mutationFn: (values) => backend.folderService.create(values),
         onSuccess: ({data},values,unknown2) => {
@@ -30,5 +36,5 @@ export const useFolderQuery = (id)=> {
         },
     });
 
-    return{find,list,addSubfolder};
+    return{files,find,list,addSubfolder};
 }
