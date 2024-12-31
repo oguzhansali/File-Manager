@@ -36,5 +36,25 @@ export const useFolderQuery = (id)=> {
         },
     });
 
-    return{files,find,list,addSubfolder};
+    const removeFolder = useMutation({
+        mutationn: (id) => backend.folderService.remove(id),
+        onSuccess: ({data},values,unknown2) => {
+            queryClient.invalidateQueries({
+                queryKey: ["folders",{_query}],
+            })
+            console.log(data,values,unknown2)
+        },
+    });
+
+    const removeFile = useMutation({
+        mutationn: (id) => backend.fileService.remove(id),
+        onSuccess: ({data},values,unknown2) => {
+            queryClient.invalidateQueries({
+                queryKey: ["files",{_query}],
+            })
+            console.log(data,values,unknown2)
+        },
+    })
+
+    return{files,find,list,addSubfolder,removeFolder,removeFile};
 }
