@@ -19,8 +19,17 @@ export const ViewProvider = ({children}) => {
     const clear = () => {
         setSelectedItems([])
     }
+
+    const itemIsSelected = (item) => {
+        return selectedItems.find((i) => i.id === item.id)
+    }
+
+    const setSelection = (items) => {
+        setSelectedItems(items);
+    }
+
     return(
-        <Context.Provider value={{selectedItems,select,dselect,clear}}>
+        <Context.Provider value={{selectedItems,select,dselect,clear,itemIsSelected,setSelection}}>
             {children}
         </Context.Provider>
     )  
