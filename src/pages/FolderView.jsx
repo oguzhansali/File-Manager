@@ -20,10 +20,11 @@ const FolderView = () => {
         parentId: params.id || "null",
     });
 
-    const handleClickCreateModal = () => {
+    const handleClickCreate = () => {
         modal.appear({
             title:"Yeni Klasör",
-            children: CreateFolderModal,
+            children:(props)=>
+            <CreateFolderModal {...props} parentFolderId={parent.id}/>,
         });
     }
 
@@ -32,7 +33,7 @@ const FolderView = () => {
             folderName={name}
             sidebar={
                 <>
-                    <button onClick={handleClickCreateModal} className="create-buttom">Create</button>
+                    <button onClick={handleClickCreate} className="create-buttom">Create</button>
                     <TreeMenuItem name="Kök Klasör" id="null" defaultExpanded={true}/>
                 </>
             }

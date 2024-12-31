@@ -5,15 +5,14 @@ import * as yup from "yup"
 import { useParams } from "react-router-dom";
 import { useFolderQuery } from "../../queries/useFolderQuery";
 
-const CreateFolderModal = ({modalId}) => {
+const  validationSchema = yup.object({
+    name:yup.string().required("Lütfen dosta adı giriniz.")
+})
+
+const CreateFolderModal = ({modalId,parentFolderId}) => {
 
     const modal = useModal();
-    const param = useParams();
-    const folder = useFolderQuery(param.id);
-
-    const  validationSchema = yup.object({
-        name:yup.string().required("Lütfen dosta adı giriniz.")
-    })
+    const folder = useFolderQuery(parentFolderId);
 
     const form = useFormik({
         initialValues:{
@@ -24,12 +23,18 @@ const CreateFolderModal = ({modalId}) => {
 
     });
 
+    const parentId = parentFolderId === "null" ? null : parentFolderId || "null";//dosya yaratırken dosya bir dosyanın altınamı yoksa 0 danmı oluşturuluyor kontrolu sağlandı parentId için.
+
     const handleOk = () => {
         form.validateForm().then((response)=>{
             if(Object.keys(response).length) return;
             folder.addSubfolder
-            .mutateAsync({...form.values, parentId:param.id ||null})
+            .mutateAsync({...form.values, parentId})
             .then(()=>{
+                modal.disappear(modalId);
+            })
+            .catch((error)=>{
+                console.error("Error during folder creation:", error);
                 modal.disappear(modalId);
             });
         });

@@ -30,7 +30,8 @@ export const ModalProvider =({children}) =>{
     return (
         <Context.Provider value={{appear,disappear}}>
             {children}
-            {modals.length && (<div backdropRef id="modals-portal" onClick={handleBackdropClick}>
+            {/*modals.length bir boolen oluşturuldu.*/}
+            {Boolean(modals.length) && (<div backdropRef id="modals-portal" onClick={handleBackdropClick}>
                 {modals.map ((modal)=>{
                     return <Modal 
                         onClose={()=> disappear(modal.id)}

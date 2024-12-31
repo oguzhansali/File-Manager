@@ -11,7 +11,7 @@ export const useFolderQuery = (id)=> {
     })
 
     const _query ={
-        parentId:id,
+        parentId:id ||"null",
     };
 
     const list = useQuery({

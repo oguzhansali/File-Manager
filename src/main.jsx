@@ -13,14 +13,14 @@ const queryClient = new QueryClient()
 
 createRoot(document.getElementById('root')).render(
   <QueryClientProvider client={queryClient}>
-    <BrowserRouter>
-      <ModalProvider> 
+    <ModalProvider> 
+      <BrowserRouter>
         <Routes>
           <Route path='/' element={<FolderView />}/>
           <Route path='folder/:id' element={<FolderView />}/>
         </Routes>
-      </ModalProvider>
-    </BrowserRouter>   
+      </BrowserRouter>   
+    </ModalProvider>
   </QueryClientProvider>
   
 )

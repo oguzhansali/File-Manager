@@ -5,28 +5,34 @@ import IconChevronDown from "../../assets/icons/IconChevronDown"
 import IconFolder from "../../assets/icons/IconFolder"
 import IconFolderOpen from "../../assets/icons/IconFolderOpen"
 import TreeMenu from "./TreeMenu";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 
 const TreeMenuItem = ({name,id,parentId,defaultExpanded}) => {
     const expanded = useBoolen(defaultExpanded || false);
     const navigate = useNavigate();
+    const params = useParams()
     const handleClick= useCallback(()=>{
         console.log(id);
 
         navigate("/folder/"+id)
     },[])
 
+    const isCurrent = params.id ===id;
+    const Icon = isCurrent ? IconFolderOpen : IconFolder;
+    const fontWeight = isCurrent ? "bold" : "normal";
+
+
     return ( 
         <div className="tree-menu-item">
             {/* Eğer 'expanded.value' false ise */}
             {!expanded.value && (
-                <div className="tree-menu-item-row" onClick={handleClick}>
+                <div className="tree-menu-item-row">
                     <button onClick={expanded.setTrue}>
                         <IconChevronRight />
                     </button>
-                    <span className="tree-menu-row-title">
+                    <span className="tree-menu-row-title" style={{fontWeight}} onClick={handleClick}>
                         <IconFolder className="folder-icon" />
                         
                         {name}
@@ -44,9 +50,8 @@ const TreeMenuItem = ({name,id,parentId,defaultExpanded}) => {
                         <IconFolderOpen  className="folder-icon"/>
                         {name}
                     </div>
-                     <span className="tree-menu-row-title">
-                        <IconFolderOpen className="folder-icon" />
-                        
+                     <span  className="tree-menu-row-title" style={{fontWeight}}>
+                        <Icon className="folder-icon" />
                         {name}
                     </span> 
                     {/* Alt dosyaları göster */}
