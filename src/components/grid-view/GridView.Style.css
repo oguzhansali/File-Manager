@@ -1,0 +1,41 @@
+.grid-view{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-size: 9pt;
+}
+
+.grid-view-title{
+    height: 40px;
+}
+
+.grid-view-item {
+    width: 100px;
+    height: 100px;
+    border: 1px solid silver;
+    border-radius: 20px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.grid-view-item > img {
+    width: 24px;
+    height: 24px;
+    margin: 5px 10px;
+}
+
+.actions{
+    margin-left: auto;
+}
+
+.preview-image-host{
+    position: relative;
+}
+
+.xmark {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+}
