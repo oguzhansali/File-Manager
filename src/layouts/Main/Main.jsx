@@ -1,8 +1,7 @@
 import React from "react";
 import './Main.styles.css';
 
-
-const Main = ({sidebar,folderName,toolbar,content}) =>{
+const Main = ({preview,sidebar,folderName,toolbar,content}) =>{
     
     return(
         <div id="container">
@@ -15,7 +14,10 @@ const Main = ({sidebar,folderName,toolbar,content}) =>{
                     </div>
                 </div>
                 <div id="toolbar">{toolbar}</div>
-                <div id="content">{content}</div>
+                <div id="content-and-preview">
+                    <div id="content">{content}</div>
+                    <div id="preview">{preview}</div>   
+                </div>
             </div>
         </div>
     )

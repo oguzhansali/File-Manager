@@ -7,9 +7,13 @@ import TreeMenuItem from "../components/tree-menu/TreeMenuItem";
 import {useModal} from "../context/modal-context/modal-context"
 import CreateFolderModal from "../modals/CreateFolderModal/CreateFolderModal";
 import ListView from "../components/list-view/ListView";
+import GridView from "../components/grid-view/GridView";
 import Toolbar from "../components/toolbar/Toolbar";
+import PreviewImage from "../components/pre-view-img/PreviewImage";
+import { useViewContext } from "../context/view-context/view-context";
 
 const FolderView = () => {
+    const viewContext = useViewContext();
     const modal = useModal();
     const params = useParams();
     const folder = useFolderQuery(params.id);
@@ -30,6 +34,7 @@ const FolderView = () => {
 
     return (    
         <Main
+            preview={<PreviewImage/>}
             toolbar={<Toolbar/>}
             folderName={name}
             sidebar={
@@ -39,7 +44,8 @@ const FolderView = () => {
                 </>
             }
             content={
-            <ListView files={folder.files.data} folder={folder.list.data}/>
+            viewContext.type === "list"? (<ListView files={folder.files.data} folder={folder.list.data}/>
+            ): <GridView files={folder.files.data} folder={folder.list.data}/>
             }
         />
     )

@@ -51,3 +51,15 @@ html{
   background: white;
   border-radius: 8px;
 }
+
+#content-and-preview{
+  display: flex;
+  flex-direction: row;
+}
+
+#preview{
+  margin-left: 20px;
+  background: white;
+  border-radius: 8px;
+  max-width: 200px;
+}

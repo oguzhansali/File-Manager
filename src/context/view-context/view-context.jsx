@@ -4,7 +4,13 @@ const Context = React.createContext(undefined);
 
 export const ViewProvider = ({children}) => {  
     const [selectedItems, setSelectedItems] = useState([]);
-    
+    const [previewEye, setPreviewEye] = useState(undefined);
+    const [type,setType] = useState("list");
+
+    const toggleType = () => {
+         setType((prev) => (prev === "list" ? "grid" : "list"));
+    } 
+
     const select = (item) => {
         setSelectedItems((prev)=> {
             if(prev.findIndex((i)=>i.id === item.id)) return prev;
@@ -29,7 +35,20 @@ export const ViewProvider = ({children}) => {
     }
 
     return(
-        <Context.Provider value={{selectedItems,select,dselect,clear,itemIsSelected,setSelection}}>
+        <Context.Provider 
+        value={{
+            setPreviewEye,
+            previewEye,
+            selectedItems,
+            select,
+            dselect,
+            clear,
+            itemIsSelected,
+            setSelection,
+            toggleType,
+            type
+            }}
+            >
             {children}
         </Context.Provider>
     )  

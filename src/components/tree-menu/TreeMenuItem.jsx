@@ -18,7 +18,7 @@ const TreeMenuItem = ({name,id,parentId,defaultExpanded}) => {
 
     const handleClick= useCallback(()=>{
         console.log(id);
-
+        clear();
         navigate("/folder/"+id)
     },[])
 
