@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import "./ListView.Style.css"
 import {useViewContext} from "./../../context/view-context/view-context"
+import { useNavigate, useParams } from "react-router-dom";
+import { useFolderQuery } from "../../queries/useFolderQuery";
+import ListViewItem from "./ListViewItem"; 
 
 const ListView = ({files,folders}) => {
-    const {setSelection,select,dselect,clear,itemIsSelected} = useViewContext()
-    const handleSelectionChange = (e,item) =>{
-        const val = e.currentTarget.checked;
-        if(val){
-            select(item);
-        }else{
-            dselect(item);
-        }
-    };
-
+    const navigate=useNavigate();//DoubleClick için bir route işleminde  kullanılır.
+    const params = useParams();
+    const folder = useFolderQuery(params.id);
+    const {setSelection,clear,itemIsSelected} = useViewContext()
+    
+    
     const bulk = (e) => {
         const val = e.currentTarget.checked;
         if(val){
@@ -28,33 +27,24 @@ const ListView = ({files,folders}) => {
             <input type="checkbox" onChange={bulk}/>
             <span>Name</span>
         </div>
-
-        {folders?.map((f)=>{
-            return(
-                <div key={f.id} className="list-view-item">
-                    <input 
-                    type="checkbox"  
-                    checked={Boolean(itemIsSelected(f))}
-                    onChange={(e)=> handleSelectionChange(e,f)}
-                    />
-                    <img src="/folder.png"/>
-                    <span>{f.name}</span>
+        <div 
+                key="parent folder" 
+                className="list-view-item" 
+                onDoubleClick={()=>{
+                    clear(); 
+                    navigate("/folder/"+folder.find.data.parentId || "null")
+                    }}
+                >
+                    <img src="/folder.png" style={{marginLeft:"30px"}}/>
+                    <span>..</span>
                 </div>      
-            );
-        })}
-
-        {files?.map((f)=>{
-            return(
-                <div key={f.id} className="list-view-item">
-                    <input 
-                    type="checkbox" 
-                    checked={Boolean(itemIsSelected(f))}
-                    onChange={(e)=> handleSelectionChange(e,f)} />
-                    <img src={f.url}/>
-                    <span>{f.name}</span>
-                </div>      
-            );
-        })}
+        {
+            [...(folders ||[]),...(files || [])].map((f)=>{{
+                return(
+                    <ListViewItem item={f}/>
+                );
+            }})
+        }
     </div>
     )
     
