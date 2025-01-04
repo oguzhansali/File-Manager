@@ -16,7 +16,7 @@ This project is a React-based file management application that integrates seamle
 [Bacend Servisine buradan ulaşabilirsiniz.](https://github.com/gorbadil/file-server-node-fire/tree/master)
 
 
-## Projede Kullanılan Bağımlılıklara buradan ulaşabilirsiniz.
+## You can access the dependencies used in the project from here.
 
  - [Axios](https://axios-http.com/)
  - [uuid](https://www.npmjs.com/package/uuid)
